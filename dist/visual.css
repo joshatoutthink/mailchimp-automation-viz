@@ -1,0 +1,297 @@
+#va-widget,
+#va-bidget {
+  box-sizing: border-box;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  max-height: 600px;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative; }
+  #va-widget *,
+  #va-widget *:after,
+  #va-widget *:before,
+  #va-bidget *,
+  #va-bidget *:after,
+  #va-bidget *:before {
+    box-sizing: inherit;
+    position: relative; }
+  #va-widget .automation,
+  #va-bidget .automation {
+    position: relative; }
+    #va-widget .automation .automation-content,
+    #va-bidget .automation .automation-content {
+      z-index: auto; }
+  #va-widget[data-state="list"] .automation-emails,
+  #va-bidget[data-state="list"] .automation-emails {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    transform: scaleY(0); }
+  #va-widget[data-state="list"] .automation-stats,
+  #va-bidget[data-state="list"] .automation-stats {
+    position: absolute;
+    visibility: hidden; }
+  #va-widget:not([data-state="list"]) > li:not([data-active]),
+  #va-bidget:not([data-state="list"]) > li:not([data-active]) {
+    position: absolute;
+    visibility: hidden; }
+  #va-widget:not([data-state="list"]) > .automation[data-active],
+  #va-bidget:not([data-state="list"]) > .automation[data-active] {
+    position: relative;
+    visibility: visible; }
+    #va-widget:not([data-state="list"]) > .automation[data-active][data-automationview="emails"] .automation-emails,
+    #va-bidget:not([data-state="list"]) > .automation[data-active][data-automationview="emails"] .automation-emails {
+      position: relative;
+      visibility: visible; }
+    #va-widget:not([data-state="list"]) > .automation[data-active][data-automationview="emails"] .automation-stats,
+    #va-bidget:not([data-state="list"]) > .automation[data-active][data-automationview="emails"] .automation-stats {
+      visibility: hidden;
+      position: absolute;
+      transform: scaleY(0);
+      top: 0; }
+    #va-widget:not([data-state="list"]) > .automation[data-active][data-automationview="stats"] .automation-emails,
+    #va-bidget:not([data-state="list"]) > .automation[data-active][data-automationview="stats"] .automation-emails {
+      position: absolute;
+      visibility: hidden;
+      transform: scaleY(0);
+      top: 0; }
+    #va-widget:not([data-state="list"]) > .automation[data-active][data-automationview="stats"] .automation-stats,
+    #va-bidget:not([data-state="list"]) > .automation[data-active][data-automationview="stats"] .automation-stats {
+      visibility: visible;
+      position: relative;
+      transform: scale(1); }
+  #va-widget .automation-nav,
+  #va-bidget .automation-nav {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    transform: scaleY(0); }
+  #va-widget:not([data-state="list"]) > [data-active] .automation-nav,
+  #va-bidget:not([data-state="list"]) > [data-active] .automation-nav {
+    position: relative;
+    visibility: visible;
+    transform: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; }
+
+#va-widget,
+#va-bidget {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px; }
+  #va-widget .bg,
+  #va-bidget .bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 8px;
+    box-shadow: 0 1vmin 1vmin rgba(0, 0, 0, 0.12);
+    overflow: hidden; }
+    #va-widget .bg:after,
+    #va-bidget .bg:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--color); }
+  #va-widget .automation-overview,
+  #va-bidget .automation-overview {
+    z-index: 3; }
+  #va-widget .automation,
+  #va-bidget .automation {
+    position: relative;
+    margin: 10px auto 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-left: 14px;
+    position: relative;
+    border-radius: 8px; }
+    #va-widget .automation .label,
+    #va-bidget .automation .label {
+      font-size: 70%;
+      width: 100%;
+      display: block;
+      z-index: 3; }
+    #va-widget .automation .back,
+    #va-bidget .automation .back {
+      font-size: 20px;
+      font-weight: 100; }
+    #va-widget .automation .label,
+    #va-bidget .automation .label {
+      font-size: 70%;
+      width: 100%;
+      display: block; }
+    #va-widget .automation .automation-details,
+    #va-bidget .automation .automation-details {
+      z-index: 3;
+      padding: 5px;
+      display: flex; }
+      #va-widget .automation .automation-details .detail,
+      #va-bidget .automation .automation-details .detail {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-right: 50px; }
+    #va-widget .automation .automation-name,
+    #va-bidget .automation .automation-name {
+      z-index: 3;
+      cursor: pointer; }
+      #va-widget .automation .automation-name h3,
+      #va-bidget .automation .automation-name h3 {
+        line-height: 1.2;
+        margin: 10px 0;
+        font-size: 18px;
+        color: var(--color); }
+    #va-widget .automation .automation-name:hover h3,
+    #va-bidget .automation .automation-name:hover h3 {
+      color: var(--color); }
+    #va-widget .automation[data-status="paused"],
+    #va-bidget .automation[data-status="paused"] {
+      --color: #b77777; }
+    #va-widget .automation[data-status="sending"],
+    #va-bidget .automation[data-status="sending"] {
+      --color: #77b777; }
+    #va-widget .automation[data-status="save"],
+    #va-bidget .automation[data-status="save"] {
+      --color: #7777b7; }
+    #va-widget .automation [data-detail="status"],
+    #va-bidget .automation [data-detail="status"] {
+      color: var(--color); }
+      #va-widget .automation [data-detail="status"] .label,
+      #va-bidget .automation [data-detail="status"] .label {
+        color: black; }
+  #va-widget:not([data-state="list"]) > .automation[data-active],
+  #va-bidget:not([data-state="list"]) > .automation[data-active] {
+    padding: 0;
+    padding-bottom: 20px; }
+    #va-widget:not([data-state="list"]) > .automation[data-active] .bg:after,
+    #va-bidget:not([data-state="list"]) > .automation[data-active] .bg:after {
+      opacity: 0; }
+    #va-widget:not([data-state="list"]) > .automation[data-active] .automation-overview,
+    #va-bidget:not([data-state="list"]) > .automation[data-active] .automation-overview {
+      z-index: 3;
+      padding: 15px;
+      border-bottom: 2px solid var(--color);
+      background: white;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      margin-bottom: 20px; }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .automation-overview h3,
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .automation-overview h3 {
+        font-size: 24px;
+        color: var(--color); }
+    #va-widget:not([data-state="list"]) > .automation[data-active] .email,
+    #va-bidget:not([data-state="list"]) > .automation[data-active] .email {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: 35px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.12);
+      position: relative; }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .email:not(:first-child),
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .email:not(:first-child) {
+        margin-top: 50px; }
+        #va-widget:not([data-state="list"]) > .automation[data-active] .email:not(:first-child):before,
+        #va-bidget:not([data-state="list"]) > .automation[data-active] .email:not(:first-child):before {
+          content: "";
+          width: 0px;
+          height: 30px;
+          position: absolute;
+          top: -40px;
+          left: 50%;
+          border-left: 2px solid var(--color); }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .email .position,
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .email .position {
+        position: absolute;
+        left: 90%;
+        top: 5%;
+        color: var(--color);
+        font-size: 30px; }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .email .email-title,
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .email .email-title {
+        width: 90%;
+        color: black;
+        font-size: 18px;
+        margin: 0; }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .email .email-automation-filter,
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .email .email-automation-filter {
+        display: none; }
+      #va-widget:not([data-state="list"]) > .automation[data-active] .email:first-child .email-automation-filter,
+      #va-bidget:not([data-state="list"]) > .automation[data-active] .email:first-child .email-automation-filter {
+        display: block;
+        background: #efefe9;
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-bottom: -20px;
+        padding: 20px; }
+        #va-widget:not([data-state="list"]) > .automation[data-active] .email:first-child .email-automation-filter span,
+        #va-bidget:not([data-state="list"]) > .automation[data-active] .email:first-child .email-automation-filter span {
+          font-weight: bold;
+          font-size: 0.85rem; }
+  #va-widget:not([data-state="list"]) li.stat,
+  #va-bidget:not([data-state="list"]) li.stat {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.12);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px; }
+  #va-widget:not([data-state="list"]) .stat__label,
+  #va-bidget:not([data-state="list"]) .stat__label {
+    color: var(--color); }
+
+.automation {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s linear 0.03s, transform 0.3s cubic-bezier(0.5, 0, 0.5, 1) 0s; }
+  .automation .email {
+    opacity: 0;
+    transition: opacity 0.3s linear calc(var(--delay) * 0.2s); }
+  .automation .stat {
+    opacity: 0;
+    transition: opacity 0.3s linear calc(var(--delay) * 0.1s); }
+
+.automations:not([data-state="list"]) .automation[data-active] {
+  transform: none; }
+  .automations:not([data-state="list"]) .automation[data-active][data-automationview="stats"] .email {
+    opacity: 0; }
+  .automations:not([data-state="list"]) .automation[data-active][data-automationview="stats"] .stat {
+    opacity: 1; }
+  .automations:not([data-state="list"]) .automation[data-active][data-automationview="emails"] .email {
+    opacity: 1; }
+  .automations:not([data-state="list"]) .automation[data-active][data-automationview="emails"] .stat {
+    opacity: 0; }
+
+.automations:not([data-state="list"]) .automation:not([data-active]) {
+  transform: translate(0, -600px) scaleY(0);
+  transition: opacity 0s linear 0s, transform 0.3s cubic-bezier(0.5, 0, 0.5, 1) 0s; }
+  .automations:not([data-state="list"]) .automation:not([data-active]) .email,
+  .automations:not([data-state="list"]) .automation:not([data-active]) .stat {
+    opacity: 0;
+    position: absolute; }
+  .automations:not([data-state="list"]) .automation:not([data-active]) > * {
+    position: absolute; }
+
+.automations:not([data-state="list"]) li[data-active] ~ .automation:not([data-active]) {
+  transform: translate(0, 600px) scaleY(0); }
+
+
+/*# sourceMappingURL=/visual.css.map */

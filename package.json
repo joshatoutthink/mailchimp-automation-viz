@@ -1,0 +1,10 @@
+{
+  "name": "visualize-automations",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel ./bundles/dashboard.js ./bundles/visual.js",
+    "build": "parcel build ./bundles/dashboard.js ./bundles/çvisual.js "
+  }
+}

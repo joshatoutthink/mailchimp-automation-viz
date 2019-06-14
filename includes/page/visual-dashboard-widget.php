@@ -45,9 +45,6 @@ function custom_dashboard_widget_content() {
     }
   }
   
-  function cmp_pos($a, $b){
-    return strcmp($a['position'], $b['position']);
-  }
   ob_start();
   ?>
   <ul id="va-widget" class="automations" data-state="list">

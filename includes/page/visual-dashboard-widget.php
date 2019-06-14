@@ -77,83 +77,8 @@ function custom_dashboard_widget_content() {
           <span class="detail" data-detail="emails-sent"><span class="label">Emails Sent:</span> <?php echo $automation['emails_sent'];?></span>
         </div>
       </div>
-      <ul class="automation-emails" >
-      <?php
-      //sorts those emails based on position
-      usort($emails, 'cmp_pos');
-
-      foreach($emails as $email){
-        $workflow_id= $email['workflow_id'];
-        $title= $email['settings']['title'];
-        $subject= $email['settings']['subject_line'];
-        $list = $email['recipients']['list_name'];
-        $segment_text = $email['recipients']['segment_text'];
-        $preview = $email['archive_url'];
-        $position = $email['position'];
-        $delay_amount = $email['delay']['amount'];
-        $delay_type = $email['delay']['type'];
-        if(!$delay_amount){
-         $delay_amount = ''; 
-        }
-        if($delay_amount > 1 ){
-          $delay_type = $delay_type.'s';
-        }
-        $delay = $delay_amount.' '.$delay_type;
-        ?>
-          <li class="email">
-            <span class="position"> <?php echo $position ; ?> </span>
-            <h4 class="email-title"><?php echo $title ;?></h4>
-            <div class="email-info">
-              <h5 class="email-subject">
-                <span class="label">Subject Line:</span>
-                <?php echo $subject ;?>
-              </h5>
-              <p class="additional-info">
-                <span class="label">trigger:</span>
-                <?php echo $email['delay']['full_description']; ?>
-              </p>
-              <p class="additional-info">
-              <span class="label">Delay:</span>
-              <?php echo $delay ;?>
-              </p>
-              <p class="additional-info">
-                <span class="label">Sending To List:</span>
-                <?php echo $list; ?>
-              </p>
-              <div class="additional-info">
-                <span class="label">Preview</span>
-                <iframe style="width:100%; border:1px solid var(--color)" src=<?php echo $preview ?>></iframe>
-              </div>
-              <div class="email-automation-filter">
-                <span>filter group:</span>
-                <?php echo $segment_text; ?>
-              </div>
-            </div>
-          </li>
-        <?php
-      }
-      ?>
-      </ul>
-      <ul class="automation-stats">
-        <li class="stat">
-          <span class="stat__label">Opens</span><?php echo $automation['report_summary']['opens']; ?>
-        </li>
-        <li class="stat">
-        <span class="stat__label">Unique Opens</span><?php echo $automation['report_summary']['unique_opens']; ?>
-        </li> 
-        <li class="stat">
-        <span class="stat__label">Open Rate</span><?php echo number_format((float)$automation['report_summary']['open_rate'] * 100, 2, '.', '') . '%'; ?>
-        </li>
-        <li class="stat">
-        <span class="stat__label">Clicks</span><?php echo $automation['report_summary']['clicks']; ?>
-        </li>
-        <li class="stat">
-        <span class="stat__label">Subscriber Clicks</span><?php echo $automation['report_summary']['subscriber_clicks']; ?>
-        </li>
-        <li class="stat">
-        <span class="stat__label">Click Rate</span><?php echo number_format((float)$automation['report_summary']['click_rate'] * 100, 2, '.', '') . '%'; ?>
-        </li>
-      </ul>  
+      <!--  -->
+      
     </li>
     <?php
   }

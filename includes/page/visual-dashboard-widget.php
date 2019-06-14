@@ -62,12 +62,6 @@ function custom_dashboard_widget_content() {
     <li class="automation" data-status= <?php echo '"'. $status .'"';?>  data-automationview="emails">
       <div class="bg" data-key=<?php echo '"automation-'. $id .'"';?>></div>
       <div class="automation-overview">
-        <div class="automation-nav">
-        <span class="back" title="view all"> 
-          <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><path fill="black" d="M352 128.4L319.7 96 160 256l159.7 160 32.3-32.4L224.7 256z"/></svg>
-        </span>
-        <span class="toggle-automation-view" title="switch view"> toggle </span>
-        </div>
         <div data-action="view" class="automation-name"  data-show=<?php echo '"automation-'. $id .'"';?> >
           <h3><?php echo $name ?></h3>
         </div>
@@ -77,8 +71,6 @@ function custom_dashboard_widget_content() {
           <span class="detail" data-detail="emails-sent"><span class="label">Emails Sent:</span> <?php echo $automation['emails_sent'];?></span>
         </div>
       </div>
-      <!--  -->
-      
     </li>
     <?php
   }

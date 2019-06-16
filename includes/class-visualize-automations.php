@@ -6,9 +6,9 @@ class Visualize_Automations {
   }
   private function load_dependencies(){
     include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/enqueue_scripts.php');
-    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/page/admin-settings.php');
-    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/page/visual-dashboard-widget.php');
-    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/page/visual-admin-page.php');
+    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/pages/settings/admin-settings.php');
+    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/pages/dashboard/visual-dashboard-widget.php');
+    include_once(plugin_dir_path(dirname( __FILE__) ) . 'includes/pages/visual/visual-admin-page.php');
   }
 }
 

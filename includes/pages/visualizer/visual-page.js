@@ -1,4 +1,4 @@
-import flip from "./flip";
+import flip from "../../../javascripts/flip";
 ///////////////--///////////////////////////////
 function widgetInit() {
   const widget = document.querySelector("#va-widget");

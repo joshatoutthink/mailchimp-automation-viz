@@ -1,2 +1,2 @@
-import "../stylesheets/dashboard-page.scss";
-import "../javascripts/dashboard-page";
+import "../includes/pages/dashboard/dashboard-page.scss";
+import "../includes/pages/dashboard/dashboard-page.js";

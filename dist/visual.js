@@ -184,7 +184,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../stylesheets/visual-page.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../includes/pages/visualizer/visual-page.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -283,10 +283,10 @@ function flip(_ref) {
 
 var _default = flip;
 exports.default = _default;
-},{}],"../javascripts/visual-page.js":[function(require,module,exports) {
+},{}],"../includes/pages/visualizer/visual-page.js":[function(require,module,exports) {
 "use strict";
 
-var _flip = _interopRequireDefault(require("./flip"));
+var _flip = _interopRequireDefault(require("../../../javascripts/flip"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -384,13 +384,13 @@ function widgetInit() {
 window.addEventListener("load", function () {
   return widgetInit();
 });
-},{"./flip":"../javascripts/flip.js"}],"visual.js":[function(require,module,exports) {
+},{"../../../javascripts/flip":"../javascripts/flip.js"}],"visual.js":[function(require,module,exports) {
 "use strict";
 
-require("../stylesheets/visual-page.scss");
+require("../includes/pages/visualizer/visual-page.scss");
 
-require("../javascripts/visual-page");
-},{"../stylesheets/visual-page.scss":"../stylesheets/visual-page.scss","../javascripts/visual-page":"../javascripts/visual-page.js"}],"../../../../../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+require("../includes/pages/visualizer/visual-page.js");
+},{"../includes/pages/visualizer/visual-page.scss":"../includes/pages/visualizer/visual-page.scss","../includes/pages/visualizer/visual-page.js":"../includes/pages/visualizer/visual-page.js"}],"../../../../../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -418,7 +418,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50231" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,7 +1,7 @@
 <?php
 
-include( plugin_dir_path(dirname( __FILE__) ) . '/MailChimp.php' );
-use \DrewM\MailChimp\MailChimp;
+
+use \DrewM\MailChimp\MailChimp; 
 
 
 
@@ -58,6 +58,7 @@ function custom_dashboard_widget_content() {
     ?>
     <li class="automation" data-status= <?php echo '"'. $status .'"';?>  data-automationview="emails">
       <div class="bg" data-key=<?php echo '"automation-'. $id .'"';?>></div>
+      
       <div class="automation-overview">
         <div data-action="view" class="automation-name"  data-show=<?php echo '"automation-'. $id .'"';?> >
           <h3><?php echo $name ?></h3>

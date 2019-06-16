@@ -1,2 +1,2 @@
-import "../includes/pages/visual/visual-page.scss";
-import "../includes/pages/visual/visual-page.js";
+import "../includes/pages/visualizer/visual-page.scss";
+import "../includes/pages/visualizer/visual-page.js";

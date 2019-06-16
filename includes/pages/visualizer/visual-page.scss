@@ -104,6 +104,8 @@
 
 #va-widget,
 #va-bidget {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px;
   .bg {
     display: block;
     position: absolute;
@@ -132,8 +134,7 @@
   .automation-overview {
     z-index: 3;
   }
-  background: rgba(0, 0, 0, 0.1);
-  padding: 10px;
+
   .automation {
     position: relative;
     margin: 10px auto 0;

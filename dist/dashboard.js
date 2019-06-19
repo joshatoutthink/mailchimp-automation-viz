@@ -190,9 +190,27 @@ var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 },{"_css_loader":"../../../../../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../includes/pages/dashboard/dashboard-page.js":[function(require,module,exports) {
-(function () {
-  console.log("b");
-})();
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function dasboardInit() {
+  var automations = _toConsumableArray(document.querySelectorAll(".automation"));
+
+  automations.forEach(function (automation) {
+    automation.addEventListener("click", function () {
+      console.log(automation.dataset.show);
+    });
+  });
+}
+
+window.addEventListener("load", function () {
+  return dasboardInit();
+});
 },{}],"dashboard.js":[function(require,module,exports) {
 "use strict";
 
@@ -227,7 +245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52407" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -339,10 +339,24 @@ function widgetInit() {
     btn.innerText = btnText;
   }
   /* */
+  //sets the initial state
 
+  /* if coming from the dashboard widget it will load the 
+    automation-id from the url query params  
+  */
+
+
+  function setStateOnPageLoad() {
+    console.log("ran");
+    var urlParams = new URLSearchParams(window.location.search);
+    var hasInitialState = urlParams.has("initial");
+    var stateFromParam = hasInitialState ? urlParams.get("initial") : "list";
+    activateState(stateFromParam);
+  }
+
+  window.addEventListener("load", setStateOnPageLoad());
   /* eventListeners and small cosmetic functions */
   //toggles the state between list and the active automation
-
 
   viewLinks.forEach(function (link) {
     return link.addEventListener("click", function () {
@@ -418,7 +432,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52407" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

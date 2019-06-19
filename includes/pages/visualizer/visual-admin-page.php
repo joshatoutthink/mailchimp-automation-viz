@@ -38,9 +38,10 @@ function create_automations_page(){
   function cmp_pos($a, $b){
     return strcmp($a['position'], $b['position']);
   }
+  
   ob_start();
   ?>
-  <ul id="va-widget" class="automations" data-state="list">
+  <ul id="va-widget" class="automations" data-state='list'>
   <?php
   usort($automations, 'cmp_status');
   foreach($automations as $automation){

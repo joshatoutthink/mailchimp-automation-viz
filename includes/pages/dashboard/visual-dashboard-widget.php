@@ -56,18 +56,25 @@ function custom_dashboard_widget_content() {
     $status = $automation['status'];
     $emails = $MailChimp->get('/automations/'.$id.'/emails')['emails'];
     ?>
-    <li class="automation" data-status= <?php echo '"'. $status .'"';?>  data-automationview="emails">
+    <li 
+      class="automation" 
+      data-status= <?php echo '"'. $status .'"';?>  
+      data-automationview="emails"
+      data-show=
+    >
       <div class="bg" data-key=<?php echo '"automation-'. $id .'"';?>></div>
       
       <div class="automation-overview">
-        <div data-action="view" class="automation-name"  data-show=<?php echo '"automation-'. $id .'"';?> >
-          <h3><?php echo $name ?></h3>
-        </div>
-        <div class="automation-details">
-          <span class="detail" data-detail="status"><span class="label">Status:</span> <?php echo $status ;?></span>
-          <span class="detail" data-detail="email-count"><span class="label">Email Count:</span> <?php echo count($emails);?></span>
-          <span class="detail" data-detail="emails-sent"><span class="label">Emails Sent:</span> <?php echo $automation['emails_sent'];?></span>
-        </div>
+        <a href=<?php echo '"/wp-admin/admin.php?page=mailchimp-automations&initial=automation-'. $id .'"';?>>
+          <div data-action="view" class="automation-name"  data-show=<?php echo '"automation-'. $id .'"';?> >
+            <h3><?php echo $name ?></h3>
+          </div>
+          <div class="automation-details">
+            <span class="detail" data-detail="status"><span class="label">Status:</span> <?php echo $status ;?></span>
+            <span class="detail" data-detail="email-count"><span class="label">Email Count:</span> <?php echo count($emails);?></span>
+            <span class="detail" data-detail="emails-sent"><span class="label">Emails Sent:</span> <?php echo $automation['emails_sent'];?></span>
+          </div>
+        </a>
       </div>
     </li>
     <?php

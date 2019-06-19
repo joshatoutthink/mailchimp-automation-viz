@@ -52,6 +52,19 @@ function widgetInit() {
   }
   /* */
 
+  //sets the initial state
+  /* if coming from the dashboard widget it will load the 
+    automation-id from the url query params  
+  */
+  function setStateOnPageLoad() {
+    console.log("ran");
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasInitialState = urlParams.has("initial");
+    const stateFromParam = hasInitialState ? urlParams.get("initial") : "list";
+    activateState(stateFromParam);
+  }
+  window.addEventListener("load", setStateOnPageLoad());
+
   /* eventListeners and small cosmetic functions */
   //toggles the state between list and the active automation
   viewLinks.forEach(

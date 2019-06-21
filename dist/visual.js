@@ -350,7 +350,12 @@ function widgetInit() {
     console.log("ran");
     var urlParams = new URLSearchParams(window.location.search);
     var hasInitialState = urlParams.has("initial");
-    var stateFromParam = hasInitialState ? urlParams.get("initial") : "list";
+
+    if (!hasInitialState) {
+      return;
+    }
+
+    var stateFromParam = urlParams.get("initial");
     activateState(stateFromParam);
   }
 

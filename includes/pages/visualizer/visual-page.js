@@ -60,7 +60,10 @@ function widgetInit() {
     console.log("ran");
     const urlParams = new URLSearchParams(window.location.search);
     const hasInitialState = urlParams.has("initial");
-    const stateFromParam = hasInitialState ? urlParams.get("initial") : "list";
+    if (!hasInitialState) {
+      return;
+    }
+    const stateFromParam = urlParams.get("initial");
     activateState(stateFromParam);
   }
   window.addEventListener("load", setStateOnPageLoad());

@@ -18,77 +18,72 @@
   max-width: 100%;
   max-height: 90vh;
   height: 100%;
-  position: relative;
   .automation {
+    width: 100%;
     position: relative;
+    transition: background-color 0s 1s;
+    background-color: transparent;
     .automation-content {
       z-index: auto;
     }
   }
   //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
   //controlls the view
+  &:not([data-state="list"]) > li:not([data-active]) {
+    visibility: visible;
+    opacity: 1 !important;
+    transform: none !important;
+    > ul {
+      //TODO re-think this
+      display: none;
+    }
+  }
+
   &[data-state="list"] .automation-emails {
     position: absolute;
     visibility: hidden;
     top: 0;
-    //transform: translate(-200%, 0) scaleY(0);
     transform: scaleY(0);
   }
   &[data-state="list"] .automation-stats {
     position: absolute;
     visibility: hidden;
   }
-  &:not([data-state="list"]) > li:not([data-active]) {
-    position: relative;
-    visibility: visible;
-    opacity: 1 !important;
-    transform: none !important;
-    > ul {
-      display: none;
-    }
-  }
-  &:not([data-state="list"]) {
-    > .automation[data-active] {
-      position: relative;
-      visibility: visible;
+  //--/--/--/--/--/
+  /*  only the active automation gets these styles applied */
+  &:not([data-state="list"]) > .automation[data-active] {
+    //controls the toggling of automation state [emails] || [stats]
+    //shows the emais
 
-      //controls the toggling of automation state [emails] || [stats]
-      //shows the emais
-      &[data-automationview="emails"] {
-        //show emails
-        .automation-emails {
-          position: relative;
-          visibility: visible;
-        }
-        //hide stats
-        .automation-stats {
-          visibility: hidden;
-          position: absolute;
-          transform: scaleY(0);
-          top: 0;
-        }
+    &[data-automationview="emails"] {
+      .automation-emails {
+        position: relative;
+        visibility: visible;
+
+        overflow-y: scroll;
       }
-      //shows the stats listed
-      &[data-automationview="stats"] {
-        //hide emails
-        .automation-emails {
-          position: absolute;
-          visibility: hidden;
-          // transform: translate(0%, 0) scale(0);
-          transform: scaleY(0);
-          top: 0;
-        }
-        //show stats
-        .automation-stats {
-          visibility: visible;
-          position: relative;
-          transform: scale(1);
-        }
+      //hide stats
+      .automation-stats {
+        visibility: hidden;
+        position: absolute;
+      }
+    }
+    //shows the stats listed
+    &[data-automationview="stats"] {
+      //hide emails
+      .automation-emails {
+        position: absolute;
+        visibility: hidden;
+      }
+      //show stats
+      .automation-stats {
+        visibility: visible;
+        position: relative;
       }
     }
   } //end of automation view
 
-  //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
+  //--/--/--/--/--
   //hides and shows the automation navigation
   .automation-nav {
     visibility: hidden;
@@ -107,13 +102,13 @@
     }
   }
   //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
-} //end of #va-widget functional styles
+} // * end of #va-widget functional styles
 
-#va-widget,
-#va-bidget {
-  background: rgba(0, 0, 0, 0.1);
+#va-widget {
+  padding: 10px;
   padding: 10px;
 
+  //--/--/--/--/--/--/--/
   //layout
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -128,14 +123,17 @@
     grid-column: 2/3;
     grid-row-start: 1;
   }
+  // end of layout
+  //--/--/--/--/--/--/--/--/-
+
   .bg {
-    display: block;
     position: absolute;
+    display: block;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    height: auto;
     background: white;
     z-index: 0;
     pointer-events: none;
@@ -158,12 +156,10 @@
   }
 
   .automation {
-    position: relative;
     margin: 10px auto 0;
     margin-bottom: 10px;
     padding: 10px;
     padding-left: 14px;
-    position: relative;
 
     .label {
       font-size: 70%;
@@ -226,20 +222,20 @@
   //for viewing the single automation
 
   > .automation[data-active] {
+    background: white;
     .bg {
       &:after {
         opacity: 0;
       }
+      box-shadow: 0 0 0 transparent;
     }
+
     padding: 0;
     padding-bottom: 20px;
     .automation-overview {
       z-index: 3;
       padding: 15px;
       border-bottom: 2px solid var(--color);
-      background: white;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
       h3 {
         font-size: 24px;
         color: var(--color);

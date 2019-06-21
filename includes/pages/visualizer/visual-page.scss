@@ -1,6 +1,10 @@
 //functionality
 //shows and hides based on the state of the widget
 
+#wpcontent {
+  padding-left: 0;
+}
+
 #va-widget,
 #va-bidget {
   box-sizing: border-box;
@@ -11,11 +15,9 @@
     box-sizing: inherit;
     position: relative;
   }
-  max-width: 600px;
-  margin: 0 auto;
-  max-height: 600px;
+  max-width: 100%;
+  max-height: 90vh;
   height: 100%;
-  overflow-y: scroll;
   position: relative;
   .automation {
     position: relative;
@@ -37,8 +39,13 @@
     visibility: hidden;
   }
   &:not([data-state="list"]) > li:not([data-active]) {
-    position: absolute;
-    visibility: hidden;
+    position: relative;
+    visibility: visible;
+    opacity: 1 !important;
+    transform: none !important;
+    > ul {
+      display: none;
+    }
   }
   &:not([data-state="list"]) {
     > .automation[data-active] {
@@ -106,6 +113,21 @@
 #va-bidget {
   background: rgba(0, 0, 0, 0.1);
   padding: 10px;
+
+  //layout
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-column-gap: 20px;
+
+  grid-auto-rows: minmax(150px, 20vh);
+
+  .automation:not([data-active]) {
+    grid-column: 1/2;
+  }
+  .automation[data-active] {
+    grid-column: 2/3;
+    grid-row-start: 1;
+  }
   .bg {
     display: block;
     position: absolute;
@@ -202,155 +224,102 @@
     }
   }
   //for viewing the single automation
-  &:not([data-state="list"]) {
-    > .automation[data-active] {
-      .bg {
-        &:after {
-          opacity: 0;
-        }
-      }
-      padding: 0;
-      padding-bottom: 20px;
-      .automation-overview {
-        z-index: 3;
-        padding: 15px;
-        border-bottom: 2px solid var(--color);
-        background: white;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        h3 {
-          font-size: 24px;
-          color: var(--color);
-        }
-        margin-bottom: 20px;
-      }
-      .email {
-        width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-        padding-top: 35px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
-        position: relative;
-        &:not(:first-child) {
-          margin-top: 50px;
-          &:before {
-            content: "";
-            width: 0px;
-            height: 30px;
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            border-left: 2px solid var(--color);
-          }
-        }
-        .position {
-          position: absolute;
-          left: 90%;
-          top: 5%;
-          color: var(--color);
-          font-size: 30px;
-        }
-        .email-title {
-          width: 90%;
-          color: black;
-          font-size: 18px;
-          margin: 0;
-        }
-        .email-automation-filter {
-          display: none;
-        }
-        &:first-child {
-          .email-automation-filter {
-            display: block;
-            background: #efefe9;
-            margin-left: -20px;
-            margin-right: -20px;
-            margin-bottom: -20px;
-            padding: 20px;
-            span {
-              font-weight: bold;
-              font-size: 0.85rem;
-            }
-          }
-        }
+
+  > .automation[data-active] {
+    .bg {
+      &:after {
+        opacity: 0;
       }
     }
-    //for viewing the autmation's stats
-
-    li.stat {
+    padding: 0;
+    padding-bottom: 20px;
+    .automation-overview {
+      z-index: 3;
+      padding: 15px;
+      border-bottom: 2px solid var(--color);
+      background: white;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      h3 {
+        font-size: 24px;
+        color: var(--color);
+      }
+      margin-bottom: 20px;
+    }
+    .email {
       width: 80%;
       margin: 0 auto;
-      margin-bottom: 10px;
       padding: 20px;
+      padding-top: 35px;
       background: white;
       border-radius: 8px;
       box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
       position: relative;
-
-      //inside-layout
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 20px;
-    }
-    .stat__label {
-      color: var(--color);
+      &:not(:first-child) {
+        margin-top: 50px;
+        &:before {
+          content: "";
+          width: 0px;
+          height: 30px;
+          position: absolute;
+          top: -40px;
+          left: 50%;
+          border-left: 2px solid var(--color);
+        }
+      }
+      .position {
+        position: absolute;
+        left: 90%;
+        top: 5%;
+        color: var(--color);
+        font-size: 30px;
+      }
+      .email-title {
+        width: 90%;
+        color: black;
+        font-size: 18px;
+        margin: 0;
+      }
+      .email-automation-filter {
+        display: none;
+      }
+      &:first-child {
+        .email-automation-filter {
+          display: block;
+          background: #efefe9;
+          margin-left: -20px;
+          margin-right: -20px;
+          margin-bottom: -20px;
+          padding: 20px;
+          span {
+            font-weight: bold;
+            font-size: 0.85rem;
+          }
+        }
+      }
     }
   }
+  //for viewing the autmation's stats
+  li.stat {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
+    position: relative;
+
+    //inside-layout
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+  }
+  .stat__label {
+    color: var(--color);
+  }
 }
+
 //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
 //deals with the animation to and from states
-.automation {
-  opacity: 1;
-  transform: none;
-  transition: opacity 0.5s linear 0.03s,
-    transform 0.3s cubic-bezier(0.5, 0, 0.5, 1) 0s;
-  .email {
-    opacity: 0;
-    transition: opacity 0.3s linear calc(var(--delay) * 0.2s);
-  }
-  .stat {
-    opacity: 0;
-    transition: opacity 0.3s linear calc(var(--delay) * 0.1s);
-  }
-}
-
-.automations:not([data-state="list"]) {
-  .automation[data-active] {
-    transform: none;
-    &[data-automationview="stats"] {
-      .email {
-        opacity: 0;
-      }
-      .stat {
-        opacity: 1;
-      }
-    }
-    &[data-automationview="emails"] {
-      .email {
-        opacity: 1;
-      }
-      .stat {
-        opacity: 0;
-      }
-    }
-  }
-  .automation:not([data-active]) {
-    transform: translate(0, -600px) scaleY(0);
-    transition: opacity 0s linear 0s,
-      transform 0.3s cubic-bezier(0.5, 0, 0.5, 1) 0s;
-    .email,
-    .stat {
-      opacity: 0;
-      position: absolute;
-    }
-    > * {
-      position: absolute;
-    }
-  }
-  & li[data-active] ~ .automation:not([data-active]) {
-    transform: translate(0, 600px) scaleY(0);
-  }
-}

@@ -21,6 +21,7 @@ function flip({
   scale = true,
   translate = true,
 }) {
+  console.clear();
   //records the size and positon
   const firstBoxes = [...document.querySelectorAll(el)];
   const firstRects = firstBoxes.map(box => {
@@ -30,7 +31,6 @@ function flip({
     const firstRect = bg1.getBoundingClientRect();
     return { rect: firstRect, key: bg1.dataset.key, isScale };
   });
-  console.log(firstRects);
 
   //changes the state causing layout change
   stateChange();
@@ -38,7 +38,9 @@ function flip({
   requestAnimationFrame(() => {
     firstRects.forEach(({ rect, key, isScale }) => {
       const [firstRect, firstKey] = [rect, key];
-      const secondBox = document.querySelector(`[data-key="${firstKey}"]`);
+      const secondBox = document.querySelector(
+        `.automation .bg[data-key="${firstKey}"]`
+      );
       //records the second size and position
       //L.ast
       const secondRect = secondBox.getBoundingClientRect();
@@ -48,6 +50,7 @@ function flip({
         firstRect,
         secondRect
       );
+      console.log(firstRect, secondRect);
       //sets second box as the firt box size and posistion
       secondBox.style.transition = "none";
       secondBox.style.transformOrigin = "center top";

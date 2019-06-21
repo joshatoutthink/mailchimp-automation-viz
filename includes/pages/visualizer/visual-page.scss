@@ -16,93 +16,135 @@
     position: relative;
   }
   max-width: 100%;
-  max-height: 90vh;
-  height: 100%;
+  height: 90vh;
+
+  .automation-list,
+  .automation-viewer {
+    max-height: 100%;
+    overflow-y: scroll;
+    overflow-x: visible !important;
+    padding: 5px;
+  }
+
+  .automation-list-item[data-active] {
+    .bg {
+      background: #efefef;
+    }
+  }
   .automation {
     width: 100%;
-    position: relative;
-    transition: background-color 0s 1s;
-    background-color: transparent;
+    display: none;
+
+    ///when its active apply these styles
+    &[data-active] {
+      display: block;
+      .bg:after {
+        opacity: 0;
+      }
+      box-shadow: 0 0 0 transparent;
+
+      padding: 0;
+      padding-bottom: 20px;
+      .automation-overview {
+        z-index: 3;
+        padding: 15px;
+        border-bottom: 2px solid var(--color);
+        h3 {
+          font-size: 24px;
+          color: var(--color);
+        }
+        margin-bottom: 20px;
+      }
+      .email {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        padding-top: 35px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
+        visibility: hidden;
+        position: absolute;
+        &:not(:first-child) {
+          margin-top: 50px;
+          &:before {
+            content: "";
+            width: 0px;
+            height: 30px;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            border-left: 2px solid var(--color);
+          }
+        }
+        .position {
+          position: absolute;
+          left: 90%;
+          top: 5%;
+          color: var(--color);
+          font-size: 30px;
+        }
+        .email-title {
+          width: 90%;
+          color: black;
+          font-size: 18px;
+          margin: 0;
+        }
+        .email-automation-filter {
+          display: none;
+        }
+        &:first-child {
+          .email-automation-filter {
+            display: block;
+            background: #efefe9;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: -20px;
+            padding: 20px;
+            span {
+              font-weight: bold;
+              font-size: 0.85rem;
+            }
+          }
+        }
+      }
+      .stat {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
+        visibility: hidden;
+        position: absolute;
+        //inside-layout
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+      }
+      .stat__label {
+        color: var(--color);
+      }
+
+      ///toggles email and stat view
+      &[data-automationview="emails"] .email {
+        visibility: visible;
+        position: relative;
+      }
+      &[data-automationview="stats"] .stat {
+        visibility: visible;
+        position: relative;
+      }
+    }
+
     .automation-content {
       z-index: auto;
     }
   }
-  //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
-  //controlls the view
-  &:not([data-state="list"]) > li:not([data-active]) {
-    visibility: visible;
-    opacity: 1 !important;
-    transform: none !important;
-    > ul {
-      //TODO re-think this
-      display: none;
-    }
-  }
-
-  &[data-state="list"] .automation-emails {
-    position: absolute;
-    visibility: hidden;
-    top: 0;
-    transform: scaleY(0);
-  }
-  &[data-state="list"] .automation-stats {
-    position: absolute;
-    visibility: hidden;
-  }
-  //--/--/--/--/--/
-  /*  only the active automation gets these styles applied */
-  &:not([data-state="list"]) > .automation[data-active] {
-    //controls the toggling of automation state [emails] || [stats]
-    //shows the emais
-
-    &[data-automationview="emails"] {
-      .automation-emails {
-        position: relative;
-        visibility: visible;
-
-        overflow-y: scroll;
-      }
-      //hide stats
-      .automation-stats {
-        visibility: hidden;
-        position: absolute;
-      }
-    }
-    //shows the stats listed
-    &[data-automationview="stats"] {
-      //hide emails
-      .automation-emails {
-        position: absolute;
-        visibility: hidden;
-      }
-      //show stats
-      .automation-stats {
-        visibility: visible;
-        position: relative;
-      }
-    }
-  } //end of automation view
-
-  //--/--/--/--/--
-  //hides and shows the automation navigation
-  .automation-nav {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    transform: scaleY(0);
-  }
-  &:not([data-state="list"]) > [data-active] {
-    .automation-nav {
-      position: relative;
-      visibility: visible;
-      transform: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-  //--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
-} // * end of #va-widget functional styles
+}
+//--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/--//
 
 #va-widget {
   padding: 10px;
@@ -114,53 +156,50 @@
   grid-template-columns: 300px 1fr;
   grid-column-gap: 20px;
 
-  grid-auto-rows: minmax(150px, 20vh);
-
-  .automation:not([data-active]) {
-    grid-column: 1/2;
-  }
-  .automation[data-active] {
-    grid-column: 2/3;
-    grid-row-start: 1;
+  .automation-viewer {
+    display: grid;
+    grid-template: 1fr / 1fr;
+    > .automation {
+      grid-row: 1/-1;
+      grid-column: 1/-1;
+    }
   }
   // end of layout
   //--/--/--/--/--/--/--/--/-
 
-  .bg {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    min-width: 100%;
-    height: auto;
-    background: white;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 8px;
-    box-shadow: 0 1vmin 1vmin rgba(black, 0.12);
-    overflow: hidden;
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 4px;
-      background: var(--color);
-    }
-  }
-
-  .automation-overview {
-    z-index: 3;
-  }
-
-  .automation {
+  .automation,
+  .automation-list-item {
     margin: 10px auto 0;
     margin-bottom: 10px;
     padding: 10px;
     padding-left: 14px;
-
+    .bg {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      min-width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 8px;
+      box-shadow: 0 1vmin 1vmin rgba(black, 0.12);
+      overflow: hidden;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: var(--color);
+      }
+    }
+    .automation-overview {
+      z-index: 3;
+    }
     .label {
       font-size: 70%;
       width: 100%;
@@ -206,6 +245,7 @@
     &[data-status="paused"] {
       --color: #b77777;
     }
+
     &[data-status="sending"] {
       --color: #77b777;
     }
@@ -218,102 +258,6 @@
       }
       color: var(--color);
     }
-  }
-  //for viewing the single automation
-
-  > .automation[data-active] {
-    background: white;
-    .bg {
-      &:after {
-        opacity: 0;
-      }
-      box-shadow: 0 0 0 transparent;
-    }
-
-    padding: 0;
-    padding-bottom: 20px;
-    .automation-overview {
-      z-index: 3;
-      padding: 15px;
-      border-bottom: 2px solid var(--color);
-      h3 {
-        font-size: 24px;
-        color: var(--color);
-      }
-      margin-bottom: 20px;
-    }
-    .email {
-      width: 80%;
-      margin: 0 auto;
-      padding: 20px;
-      padding-top: 35px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
-      position: relative;
-      &:not(:first-child) {
-        margin-top: 50px;
-        &:before {
-          content: "";
-          width: 0px;
-          height: 30px;
-          position: absolute;
-          top: -40px;
-          left: 50%;
-          border-left: 2px solid var(--color);
-        }
-      }
-      .position {
-        position: absolute;
-        left: 90%;
-        top: 5%;
-        color: var(--color);
-        font-size: 30px;
-      }
-      .email-title {
-        width: 90%;
-        color: black;
-        font-size: 18px;
-        margin: 0;
-      }
-      .email-automation-filter {
-        display: none;
-      }
-      &:first-child {
-        .email-automation-filter {
-          display: block;
-          background: #efefe9;
-          margin-left: -20px;
-          margin-right: -20px;
-          margin-bottom: -20px;
-          padding: 20px;
-          span {
-            font-weight: bold;
-            font-size: 0.85rem;
-          }
-        }
-      }
-    }
-  }
-  //for viewing the autmation's stats
-  li.stat {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0.5vmin 1vmin rgba(black, 0.12);
-    position: relative;
-
-    //inside-layout
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-  }
-  .stat__label {
-    color: var(--color);
   }
 }
 

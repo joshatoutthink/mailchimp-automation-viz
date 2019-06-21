@@ -232,8 +232,8 @@ function flip(_ref) {
       scale = _ref$scale === void 0 ? true : _ref$scale,
       _ref$translate = _ref.translate,
       translate = _ref$translate === void 0 ? true : _ref$translate;
+  console.clear(); //records the size and positon
 
-  //records the size and positon
   var firstBoxes = _toConsumableArray(document.querySelectorAll(el));
 
   var firstRects = firstBoxes.map(function (box) {
@@ -246,8 +246,7 @@ function flip(_ref) {
       key: bg1.dataset.key,
       isScale: isScale
     };
-  });
-  console.log(firstRects); //changes the state causing layout change
+  }); //changes the state causing layout change
 
   stateChange();
   requestAnimationFrame(function () {
@@ -257,7 +256,7 @@ function flip(_ref) {
           isScale = _ref2.isScale;
       var firstRect = rect,
           firstKey = key;
-      var secondBox = document.querySelector("[data-key=\"".concat(firstKey, "\"]")); //records the second size and position
+      var secondBox = document.querySelector(".automation .bg[data-key=\"".concat(firstKey, "\"]")); //records the second size and position
       //L.ast
 
       var secondRect = secondBox.getBoundingClientRect(); //I.nvert
@@ -266,8 +265,9 @@ function flip(_ref) {
           deltaX = _getDelta.deltaX,
           deltaY = _getDelta.deltaY,
           deltaW = _getDelta.deltaW,
-          deltaH = _getDelta.deltaH; //sets second box as the firt box size and posistion
+          deltaH = _getDelta.deltaH;
 
+      console.log(firstRect, secondRect); //sets second box as the firt box size and posistion
 
       secondBox.style.transition = "none";
       secondBox.style.transformOrigin = "center top";
@@ -301,7 +301,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 ///////////////--///////////////////////////////
 function widgetInit() {
   var widget = document.querySelector("#va-widget");
-  var automations = document.querySelectorAll(".automation");
+  var automations = document.querySelectorAll(".automation, .automation-list-item");
 
   var viewLinks = _toConsumableArray(automations).map(function (automation) {
     return automation.querySelector('[data-action="view"]');
@@ -311,20 +311,15 @@ function widgetInit() {
 
 
   function activateState(link) {
-    var stateValue = typeof link === "string" ? link : link.closest(".automation").dataset.active ? "list" : link.dataset.show;
-    (0, _flip.default)({
-      el: "[data-key]",
-      stateChange: function stateChange() {
-        return widget.dataset.state = stateValue;
-      }
-    }); //removes all active attributes
+    var stateValue = typeof link === "string" ? link : link.closest(".automation, .automation-list-item").dataset.active ? "list" : link.dataset.show;
+    widget.dataset.state = stateValue; //removes all active attributes
 
     document.querySelectorAll("[data-active]").forEach(function (el) {
       return el.removeAttribute("data-active");
     }); //adds active attribute to automation which was clicked
 
     document.querySelectorAll("[data-show=\"".concat(stateValue, "\"]")).forEach(function (el) {
-      return el.closest(".automation").setAttribute("data-active", true);
+      return el.closest(".automation, .automation-list-item").setAttribute("data-active", true);
     });
   } //controls going from emails and stats view from with in the automation view
 
@@ -367,16 +362,14 @@ function widgetInit() {
     return link.addEventListener("click", function () {
       return activateState(link);
     });
-  } //TODO scroll to container top
-  ); //controls the state when go back button is clicked
+  }); //controls the state when go back button is clicked
 
   var back = widget.querySelectorAll(".back");
   back.forEach(function (back) {
     return back.addEventListener("click", function () {
       return activateState("list");
     });
-  } //TODO scroll to container top
-  ); //toggles the automation state
+  }); //toggles the automation state
 
   var automationStateToggle = document.querySelectorAll(".toggle-automation-view");
 

@@ -3,7 +3,10 @@ import flip from "../../../javascripts/flip";
 function widgetInit() {
   const widget = document.querySelector("#va-widget");
 
-  const automations = document.querySelectorAll(".automation");
+  const automations = document.querySelectorAll(
+    ".automation, .automation-list-item"
+  );
+
   const viewLinks = [...automations].map(automation =>
     automation.querySelector('[data-action="view"]')
   );
@@ -14,14 +17,11 @@ function widgetInit() {
     const stateValue =
       typeof link === "string"
         ? link
-        : link.closest(".automation").dataset.active
+        : link.closest(".automation, .automation-list-item").dataset.active
         ? "list"
         : link.dataset.show;
 
-    flip({
-      el: "[data-key]",
-      stateChange: () => (widget.dataset.state = stateValue),
-    });
+    widget.dataset.state = stateValue;
     //removes all active attributes
     document
       .querySelectorAll("[data-active]")
@@ -31,7 +31,9 @@ function widgetInit() {
     document
       .querySelectorAll(`[data-show="${stateValue}"]`)
       .forEach(el =>
-        el.closest(".automation").setAttribute("data-active", true)
+        el
+          .closest(".automation, .automation-list-item")
+          .setAttribute("data-active", true)
       );
   }
 
@@ -70,16 +72,14 @@ function widgetInit() {
 
   /* eventListeners and small cosmetic functions */
   //toggles the state between list and the active automation
-  viewLinks.forEach(
-    link => link.addEventListener("click", () => activateState(link))
-    //TODO scroll to container top
+  viewLinks.forEach(link =>
+    link.addEventListener("click", () => activateState(link))
   );
 
   //controls the state when go back button is clicked
   const back = widget.querySelectorAll(".back");
-  back.forEach(
-    back => back.addEventListener("click", () => activateState("list"))
-    //TODO scroll to container top
+  back.forEach(back =>
+    back.addEventListener("click", () => activateState("list"))
   );
 
   //toggles the automation state

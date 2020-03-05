@@ -5,6 +5,6 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel ./bundles/dashboard.js ./bundles/visual.js",
-    "build": "parcel build ./bundles/dashboard.js ./bundles/çvisual.js "
+    "build": "parcel build ./bundles/dashboard.js ./bundles/visual.js "
   }
 }
